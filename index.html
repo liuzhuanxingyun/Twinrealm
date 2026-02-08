@@ -13,8 +13,9 @@
 <body>
     <header id="top-bar">
         <div class="title">Twinrealm <span class="subtitle">双界地图</span></div>
-        <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="搜索城市...（真实名称或异世界名称）">
+        <div class="top-right">
+            <input type="text" id="search-input" placeholder="搜索地点...">
+            <button id="add-btn">+ 添加地点</button>
         </div>
     </header>
 
@@ -26,10 +27,75 @@
         <label><input type="checkbox" value="scifi" checked><span class="dot scifi"></span> 科幻</label>
         <label><input type="checkbox" value="fantasy" checked><span class="dot fantasy"></span> 奇幻</label>
         <label><input type="checkbox" value="anime" checked><span class="dot anime"></span> 动漫</label>
-        <div id="city-count">显示 20/20 个城市</div>
+        <div id="city-count">显示 0/0 个地点</div>
     </aside>
 
     <div id="map"></div>
+
+    <!-- 添加地点弹窗 -->
+    <div id="add-modal">
+        <div class="modal-content">
+            <button id="modal-close">&times;</button>
+            <h2>添加新地点</h2>
+            <form id="add-form">
+                <div class="form-row">
+                    <label for="add-name">地点名称 *</label>
+                    <input type="text" id="add-name" placeholder="你为这个地点取的名字" required>
+                </div>
+
+                <div class="form-row">
+                    <label>位置 *</label>
+                    <div class="pick-row">
+                        <button type="button" id="pick-btn">在地图上选点</button>
+                        <span id="pick-hint">点击地图选取位置</span>
+                    </div>
+                    <input type="hidden" id="add-lat">
+                    <input type="hidden" id="add-lng">
+                </div>
+
+                <div class="form-row">
+                    <label for="add-real">真实地点</label>
+                    <input type="text" id="add-real" placeholder="对应的现实地名（如：某某路某某店）">
+                </div>
+
+                <div class="form-row">
+                    <label for="add-location">详细地址</label>
+                    <input type="text" id="add-location" placeholder="省/市/区/街道">
+                </div>
+
+                <div class="form-row">
+                    <label for="add-category">分类 *</label>
+                    <select id="add-category" required>
+                        <option value="rpg">RPG</option>
+                        <option value="scifi">科幻</option>
+                        <option value="fantasy">奇幻</option>
+                        <option value="anime">动漫</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label for="add-desc">描述</label>
+                    <textarea id="add-desc" rows="3" placeholder="这个地点的故事..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <label for="add-tags">标签</label>
+                    <input type="text" id="add-tags" placeholder="用逗号分隔，如：赛博朋克,地下城">
+                </div>
+
+                <div class="form-row">
+                    <label for="add-image">图片（可选，最大 5MB）</label>
+                    <div class="file-row">
+                        <label class="file-btn" for="add-image">选择图片</label>
+                        <span id="image-name"></span>
+                    </div>
+                    <input type="file" id="add-image" accept="image/*" hidden>
+                </div>
+
+                <button type="submit">提交</button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/data.js"></script>
